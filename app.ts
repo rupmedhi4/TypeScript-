@@ -134,4 +134,116 @@
 // type EvenNumber = number
 
 
+//Unions
+
+// type ID = number | string;
+
+// //narrowing
+// function printId(id:ID){
+//     if(typeof id === "string"){
+//             console.log(id.toUpperCase());
+//     }else{
+//         console.log(id);
+        
+//     }
+     
+// }
+
+//printId(1)
+
+
+// function getFirstThree(x:string | number[]){
+//     return x.slice(0,3)
+// }
+
+// // generics
+
+// function logString(arg:string){
+//     console.log(arg)
+//     return arg
+// }
+// logString('logged in')
+
+
+// function logNumber(arg:number){
+//     console.log(arg)
+//     return arg
+// }
+// logNumber(1);
+
+// function logArray(arg:any[]){
+//     console.log(arg)
+//     return arg
+// }
+// logArray([2,3,4]);
+
+
+// function logAnything <T>(arg:T):T{
+//     console.log(arg)
+//     return arg
+// }
+// logAnything([2,3,4]);
+
+
+// interface HasAge{
+//     age:number
+// }
+
+// function getOldest<T extends HasAge>(people:T[]):T{
+//    return people.sort((a,b)=>b.age - a.age)[0]
+// }
+
+// const people:HasAge[] = [{age:30},{age:40},{age:10}]
+
+
+// interface Player{
+//     name:string,
+//     age :number
+// }
+
+
+
+// const players:Player[] = [
+//     {name:"rup",age:30},
+//     {name:"jyoti",age:20},
+//     {name:"medhi",age:10},
+// ]
+
+// //assertion
+// //getOldest(players) as Player
+
+// const person = getOldest(players) 
+
+// //Generics
+// person.name
+ 
+ 
+interface IPost {
+    title :string;
+    id:number;
+    description :string
+}
+interface IUser {
+    name :string;
+    id:number;
+    age :string
+}
+
+const  fetchPostData= async(path:string):Promise<IPost[]>=>{
+    const response = await fetch(`http://example.com${path}`)
+    return response.json()
+}
+const  fetchUserData= async<ResultType>(path:string):Promise<ResultType>=>{
+    const response = await fetch(`http://example.com${path}`)
+    return response.json()
+}
+
+
+(async()=>{
+   //const posts = await fetchPostData('/posts')
+   const userData = await fetchUserData<IUser[]>("/users")
+})()
+
+
+
 
